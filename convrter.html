@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+  <script>
+    var copied ="copied";
+    function calculateVW() {
+      var value = document.getElementById("vwpx").value;
+      var answer = document.getElementById("answer");
+      answer.innerText = (value * 100 / 3840);
+      SelectText("answer");
+      document.execCommand('copy');
+      var flash =document.getElementById("falsh");
+      flash.innerText =copied;
+      setTimeout(function(){
+        flash.innerText ="";
+        answer.innerText ="";
+        document.getElementById("vwpx").value ="";
+      },2000);
+
+    }
+    function calculateVh() {
+      var value = document.getElementById("vhpx").value;
+      var answer = document.getElementById("answer");
+      answer.innerText = (value * 100 / 2160);
+      SelectText("answer");
+      document.execCommand('copy');
+      var flash =document.getElementById("falsh");
+      flash.innerText =copied;
+      setTimeout(function(){
+        flash.innerText ="";
+        answer.innerText ="";
+        document.getElementById("vhpx").value ="";
+      },2000);
+    }
+
+    function SelectText(element) {
+      var doc = document
+        , text = doc.getElementById(element)
+        , range, selection
+        ;
+      if (doc.body.createTextRange) {
+        range = document.body.createTextRange();
+        range.moveToElementText(text);
+        range.select();
+      } else if (window.getSelection) {
+        selection = window.getSelection();
+        range = document.createRange();
+        range.selectNodeContents(text);
+        selection.removeAllRanges();
+        selection.addRange(range);
+      }
+    }
+
+  </script>
+
+  <div class="container" style="background:#e5eef2; margin-top:34vh; margin-left: 24vw;" >
+    <h2 style="color:#1f3044">Pixel to View Port Values Converter</h2>
+    <form>
+      <div class="form-group">
+        <label for="usr">Value in px For VW</label>
+        <input onblur="calculateVW()" type="text" class="form-control" id="vwpx">
+      </div>
+      <div class="form-group">
+        <label for="usr">Value in px For Vh</label>
+        <input onblur="calculateVh()" type="text" class="form-control" id="vhpx">
+      </div>
+      <label>Answer : </label>
+      <label id="answer"></label>
+      <label id="falsh"></label>
+
+    </form>
+  </div>
+
+</body>
+
+</html>
